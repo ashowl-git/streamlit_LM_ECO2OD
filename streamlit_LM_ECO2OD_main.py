@@ -98,3 +98,4 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
 
 
+st.subheader('국토안전관리원 온실가스절감 예측')
