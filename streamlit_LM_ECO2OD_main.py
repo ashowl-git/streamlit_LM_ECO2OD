@@ -77,7 +77,7 @@ from sklearn.metrics import mean_squared_log_error
 # # hide the hamburger menu?
 hide_menu_style = """
         <style>
-        #MainMenu {visibility: visible;}
+        #MainMenu {visibility: hidden;}
         footer {visibility: visible;}
         footer:after {content:'Copyright @ 2023: EAN technology all rights reserved';
         display:block;
