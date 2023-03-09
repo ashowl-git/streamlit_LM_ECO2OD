@@ -79,7 +79,7 @@ hide_menu_style = """
         <style>
         #MainMenu {visibility: hidden;}
         footer {visibility: visible;}
-        footer:after {content:'Copyright @ 2023: (주)이에이엔테크놀로지 all rights reserved';
+        footer:after {content:'Copyright @ 2023: (주)이에이엔테크놀로지 지속가능기술연구소 all rights reserved';
         display:block;
         opsition:relatiive;
         color:gray; #tomato
