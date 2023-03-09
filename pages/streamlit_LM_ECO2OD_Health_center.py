@@ -226,9 +226,8 @@ print('MAE : {0:.3f}, MAPE : {1:.3f}'.format(mae, mape))
 print('Variance score(r2_score) : {0:.3f}'.format(r2_score(y_test, y_preds)))
 r2 = r2_score(y_test, y_preds)
 
-
-st.subheader('LinearRegression 모델 성능')
-st.caption('--------', unsafe_allow_html=False)
+st.caption('--------------------------------------------------------------------', unsafe_allow_html=False)
+st.subheader('LinearRegression model 평가')
 
 col1, col2 = st.columns(2)
 col1.metric(label='Variance score(r2_score)', value = np.round(r2, 3))
@@ -239,7 +238,7 @@ col3.metric(label='root mean_squared_error', value = np.round(rmse, 3))
 col4.metric(label='mean_absolute_error', value = np.round(mae, 3))
 
 st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
-
+st.caption('--------------------------------------------------------------------', unsafe_allow_html=False)
 
 # print('절편값:',lr.intercept_)
 # print('회귀계수값:',np.round(lr.coef_, 1))
@@ -252,10 +251,10 @@ coeff2 = pd.DataFrame(np.round(lr.coef_,2), columns=lm_features2).T
 coeff.columns = lm_result_features
 coeff2.columns = lm_result_features2
 
-st.subheader('LinearRegression 회귀계수')
-st.caption('--------', unsafe_allow_html=False)
-coeff
-# coeff2
+# st.subheader('LinearRegression 회귀계수')
+# st.caption('--------', unsafe_allow_html=False)
+# coeff
+# # coeff2
 
 
 # Sidebar
@@ -361,20 +360,16 @@ df_result2['Alt'] = 'Alt_1'
 # df_result['kW/m2'] = df_result['kW'] / df_input['Occupied_floor_area'][0]
 # df_result2['kW/m2'] = df_result2['kW'] / df2_input['Occupied_floor_area_2'][0]
 
-
-df_result
-df_result2
+# df_result
+# df_result2
 
 df_concat = pd.concat([df_result,df_result2])
-
-
-
 
 # 추세에 따라 음수값이 나오는것은 0으로 수정
 cond1 = df_concat['kW/m2'] < 0
 df_concat.loc[cond1,'kW/m2'] = 0
 
-st.checkbox("Use container width _ BASE", value=False, key="use_container_width")
+# st.checkbox("Use container width _ BASE", value=False, key="use_container_width")
 # st.dataframe(df_concat, use_container_width=st.session_state.use_container_width)
 
 df_concat = df_concat.reset_index(drop=False)
@@ -542,7 +537,7 @@ col1.metric(label="Alt_tCO2eq/$m^2$",
           delta = np.round(tCO2eq_reduce, 4), 
           delta_color="inverse")
 
-col2.metric(label="Reduce_tCO2eq/m2", 
+col2.metric(label="Reduce_tCO2eq/$m^2$", 
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
