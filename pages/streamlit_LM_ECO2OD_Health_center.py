@@ -377,7 +377,7 @@ df2_concat = df_concat.round(2)
 
 
 # 예측값을 데이터 프레임으로 만들어본것을 그래프로 그려보기
-st.caption('--------- ', unsafe_allow_html=False)
+st.caption('---------------------------------------------------------------------- ', unsafe_allow_html=False)
 st.subheader('사용처별 에너지 사용량 예측값 그래프')
 
 fig = px.bar(df_concat, x='index', y='kW/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kW/m2'],   color='Alt' )
@@ -393,16 +393,10 @@ fig.update_layout(barmode='group') #alt별 구분
 st.plotly_chart(fig, use_container_width=True)
 
 df_groupby_sum = df_concat.groupby('Alt')['kW/m2'].sum()
+
 st.dataframe(df_groupby_sum)
 
-st.caption('--------- ', unsafe_allow_html=False)
-
-st.dataframe(df_concat)
-# df_concat
-
-
-
-
+st.caption('----------------------------------------------------------------------- ', unsafe_allow_html=False)
 
 
 #____________________온실가스 산정부
