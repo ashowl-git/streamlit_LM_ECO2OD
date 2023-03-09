@@ -96,4 +96,4 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
 # st.subheader('국토안전관리원 온실가스절감 예측')
 # st.markdown('Streamlit is **_really_ cool**.')
-st.markdown('국토안전관리원 **_온실가스절감량_ 예측l**.')
+st.markdown('국토안전관리원 **_온실가스절감량_ 예측**.')
