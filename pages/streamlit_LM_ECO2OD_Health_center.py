@@ -525,7 +525,7 @@ df_concat2
 
 # 에너지원별로 전개하여 산출된 온실가스를 한개의 컬럼으로 합산 된 값을 BASE ALT별로 총합산된 데이터 프레임
 df_tCO2eq = df_concat2.groupby('Alt')['tCO2eq/m2'].agg(sum).reset_index() 
-df_tCO2eq
+st.dataframe(df_tCO2eq)
 
 # 개선후 온실가스 배출량 - 기존 온실가스배출량 계산으로 감축량 계산
 tCO2eq_Alt = df_tCO2eq['tCO2eq/m2'].loc[0]
