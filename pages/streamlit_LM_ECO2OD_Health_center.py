@@ -527,21 +527,18 @@ df_concat2.loc[cond6|cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2e
 
 
 
-
-
 df_concat2 = df_concat2.fillna(0)
 df_concat2['tCO2eq/m2'] = df_concat2['tCO2eq_Elec/m2'] + df_concat2['tCO2eq_LPG/m2'] + df_concat2['tCO2eq_LNG/m2']  + df_concat2['tCO2eq_LOil/m2']  
-# df_concat2
+df_concat2
 
 
-df_tCO2eq = df_concat2.groupby('Alt')['tCO2eq/m2'].agg(sum).reset_index()
+df_tCO2eq = df_concat2.groupby('Alt')['tCO2eq/m2'].agg(sum).reset_index() 
 df_tCO2eq
 
 
 tCO2eq_Alt = df_tCO2eq['tCO2eq/m2'].loc[0]
 tCO2eq_BASE = df_tCO2eq['tCO2eq/m2'].loc[1]
 tCO2eq_reduce = tCO2eq_Alt - tCO2eq_BASE
-
 
 
 
@@ -562,18 +559,18 @@ col2.metric(label="Reduce_tCO2eq/m2",
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
-# 사용처별 온실가스 절감량 확인해보기 (굳이 필요한가?)
-# drop=True or drop col
-df_tCO2eq_BASE = df_concat2.loc[df_concat2['Alt'] == 'BASE', ['tCO2eq/m2']].reset_index()
-df_tCO2eq_Alt_1 = df_concat2.loc[df_concat2['Alt'] == 'Alt_1', ['tCO2eq/m2']].reset_index()
+# # 사용처별 온실가스 절감량 확인해보기 (굳이 필요한가?)
+# # drop=True or drop col
+# df_tCO2eq_BASE = df_concat2.loc[df_concat2['Alt'] == 'BASE', ['index','tCO2eq/m2']].reset_index()
+# df_tCO2eq_Alt_1 = df_concat2.loc[df_concat2['Alt'] == 'Alt_1', ['index','tCO2eq/m2']].reset_index()
 # df_tCO2eq_BASE
 # df_tCO2eq_Alt_1
 
-df_tCO2eq_element = df_tCO2eq_Alt_1 - df_tCO2eq_BASE
-# df_tCO2eq_element = df_tCO2eq_element.drop(columns='index')
-df_tCO2eq_element['index'] = ['난방','냉방','급탕','환기','조명']
+# df_tCO2eq_element = df_tCO2eq_Alt_1['tCO2eq/m2'] - df_tCO2eq_BASE['tCO2eq/m2']
+# # df_tCO2eq_element = df_tCO2eq_element.drop(columns='index')
+# # df_tCO2eq_element['index'] = ['난방','냉방','급탕','환기','조명']
 
-df_tCO2eq_element.set_index(keys=['index'], inplace=False, )
-df_tCO2eq_element
+# df_tCO2eq_element.set_index(keys=['index'], inplace=False, )
+# df_tCO2eq_element
 
 
