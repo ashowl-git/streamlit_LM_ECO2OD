@@ -396,7 +396,7 @@ df_groupby_sum = df_concat.groupby('Alt')['kW/m2'].sum()
 
 st.dataframe(df_groupby_sum)
 
-st.caption('----------------------------------------------------------------------- ', unsafe_allow_html=False)
+# st.caption('----------------------------------------------------------------------- ', unsafe_allow_html=False)
 
 
 #____________________온실가스 산정부
@@ -469,7 +469,7 @@ alt_DHW_LNG_ratio = col2.number_input('alt_ 급탕용_LNG비율',min_value=0.0, 
 alt_DHW_LPG_ratio = col3.number_input('alt_ 급탕용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 alt_DHW_LOil_ratio = col4.number_input('alt_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
-st.caption('--------', unsafe_allow_html=False)
+
 
 cond2 = df_concat2['index'] == '난방'
 cond3 = df_concat2['index'] == '급탕'
@@ -507,6 +507,10 @@ cond7 = df_concat2['index'] == '조명'
 cond8 = df_concat2['index'] == '환기'
 df_concat2.loc[cond6|cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2eq_elec_co
 
+
+
+st.caption('--------', unsafe_allow_html=False)
+st.subheader('Greenhouse Gas(GHG) 발생량')
 # 에너지원별로 전개하여 산출된 온실가스를 한개의 컬럼으로 합산
 df_concat2 = df_concat2.fillna(0)
 df_concat2['tCO2eq/m2'] = df_concat2['tCO2eq_Elec/m2'] + df_concat2['tCO2eq_LPG/m2'] + df_concat2['tCO2eq_LNG/m2']  + df_concat2['tCO2eq_LOil/m2']  
