@@ -238,7 +238,7 @@ col3.metric(label='root mean_squared_error', value = np.round(rmse, 3))
 col4.metric(label='mean_absolute_error', value = np.round(mae, 3))
 
 st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
-st.caption('--------------------------------------------------------------------', unsafe_allow_html=False)
+
 
 # print('절편값:',lr.intercept_)
 # print('회귀계수값:',np.round(lr.coef_, 1))
@@ -345,10 +345,10 @@ df2_input = user_input_features2()
 
 result2 = lr2.predict(df2_input)
 
-
+st.caption('---------------------------------------------------------------- ', unsafe_allow_html=False)
 st.subheader('에너지 사용량 예측값')
 st.caption('좌측의 변수항목 슬라이더 조정 ', unsafe_allow_html=False)
-st.caption('--------- ', unsafe_allow_html=False)
+
 
 # 예측된 결과를 데이터 프레임으로 만들어 보기
 df_result = pd.DataFrame(result, columns=lm_result_features).T.rename(columns={0:'kW/m2'})
