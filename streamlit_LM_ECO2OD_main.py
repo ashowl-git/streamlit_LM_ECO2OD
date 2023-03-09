@@ -92,6 +92,8 @@ hide_menu_style = """
 st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수")
 st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
+st.markdown('Streamlit is **_really_ cool**.')
+
 
 
 
