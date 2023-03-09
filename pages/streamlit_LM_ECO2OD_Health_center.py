@@ -455,7 +455,7 @@ st.caption('--------', unsafe_allow_html=False)
 st.subheader('BASE_ 난방및 급탕을 위한 연료종류의 비율')
 
 col1, col2, col3, col4 = st.columns(4)
-base_heat_elec_ratio = col1.number_input('BASE_ 난방용_전기비율',min_value=0, max_value=1, value=0.8)
+base_heat_elec_ratio = col1.number_input('BASE_ 난방용_전기비율',value=0.8)
 base_heat_LNG_ratio = col2.number_input('BASE_ 난방용_LNG비율')
 base_heat_LPG_ratio = col3.number_input('BASE_ 난방용_LPG비율')
 base_heat_LOil_ratio = col4.number_input('BASE_ 난방용_등유비율')
