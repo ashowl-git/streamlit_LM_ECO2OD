@@ -530,12 +530,12 @@ st.caption('--------', unsafe_allow_html=False)
 st.subheader('Greenhouse Gas(GHG) savings')
 
 col1, col2 = st.columns(2)
-col1.metric(label="Alt_tCO2eq/$m^2$", 
+col1.metric(label="Alt_$tCO_2eq/m^2$", 
           value = np.round(tCO2eq_Alt, 4),
           delta = np.round(tCO2eq_reduce, 4), 
           delta_color="inverse")
 
-col2.metric(label="Reduce $tCO_2eq/m^2$", 
+col2.metric(label="Reduce_$tCO_2eq/m^2$", 
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
