@@ -574,6 +574,6 @@ df_tCO2eq_element = df_tCO2eq_Alt_1 - df_tCO2eq_BASE
 df_tCO2eq_element['index'] = ['난방','냉방','급탕','환기','조명']
 
 df_tCO2eq_element.set_index(keys=['index'], inplace=False, )
-df_tCO2eq_element.T
+df_tCO2eq_element
 
 
