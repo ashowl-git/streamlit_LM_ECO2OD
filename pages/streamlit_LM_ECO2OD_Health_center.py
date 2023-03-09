@@ -418,44 +418,37 @@ CO2_GWP = 1
 CH4_GWP = 21
 N2O_GWP = 310
 
-
 # 전기 tGHG/MWh
 CO2_elec = 0.4567 * CO2_GWP
 CH4_elec = 0.0000036 * CH4_GWP
 N2O_elec = 0.0000085 * N2O_GWP
-
 tCO2eq_elec_co = (CO2_elec+CH4_elec+N2O_elec)
 
-# 가스 LNG kgGHG/TJ
+# 가스 LNG kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
 CO2_LNG = 56100 * CO2_GWP
 CH4_LNG = 5 * CH4_GWP
 N2O_LNG = 0.1 * N2O_GWP
-
-#MW -> MJ로 환산필요 (3.6*0.000001)
 tCO2eq_LNG_co = 3.6*0.000001 * (CO2_LNG+CH4_LNG+N2O_LNG)
 
-# 가스 LPG kgGHG/TJ
+# 가스 LPG kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
 CO2_LPG = 63100 * CO2_GWP
 CH4_LPG = 5 * CH4_GWP
 N2O_LPG = 0.1 * N2O_GWP
-
-#MW -> MJ로 환산필요 (3.6*0.000001)
 tCO2eq_LPG_co = 3.6*0.000001 * (CO2_LPG+CH4_LPG+N2O_LPG)
 
-
-# 가스 등유 kgGHG/TJ
+# 가스 등유 kgGHG/TJ kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
 CO2_LOil = 71900 * CO2_GWP
 CH4_LOil = 10 * CH4_GWP
 N2O_LOil = 0.6 * N2O_GWP
-
-#MW -> MJ로 환산필요 (3.6*0.000001)
 tCO2eq_LOil_co = 3.6*0.000001 * (CO2_LOil+CH4_LOil+N2O_LOil)
 
-
-# 탄소배출량 계산 간이
+# 온실가스 계산을 위해 MW/m2 컬럼추가
 df_concat2 = df_concat.copy()
 df_concat2['MW/m2'] = df_concat2['kW/m2'] / 1000
 df_concat2
+
+
+
 
 #연료 비율 정의
 st.caption('--------', unsafe_allow_html=False)
@@ -494,70 +487,67 @@ cond3 = df_concat2['index'] == '급탕'
 cond4 = df_concat2['Alt'] == 'BASE'
 cond5 = df_concat2['Alt'] == 'Alt_1'
 
-# 난방 열원의 연료종류 비율 조정
+# BASE 난방 열원의 연료종류 비율 조정
 df_concat2.loc[cond2&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_heat_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_heat_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_heat_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_heat_LOil_ratio * tCO2eq_LOil_co
 
-# 급탕 열원의 연료종류 비율 조정
+# BASE 급탕 열원의 연료종류 비율 조정
 df_concat2.loc[cond3&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_DHW_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_DHW_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_DHW_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_DHW_LOil_ratio * tCO2eq_LOil_co
 
-# 난방 열원의 연료종류 비율 조정
+# Alt_1 난방 열원의 연료종류 비율 조정
 df_concat2.loc[cond2&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_heat_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_heat_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_heat_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_heat_LOil_ratio * tCO2eq_LOil_co
 
-# 급탕 열원의 연료종류 비율 조정
+# Alt_1 급탕 열원의 연료종류 비율 조정
 df_concat2.loc[cond3&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_DHW_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_DHW_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_DHW_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_DHW_LOil_ratio * tCO2eq_LOil_co
 
 
-# 전기사용 index는 그대로 전기로
+# 전기사용하는 냉방 조명 환기 index는 그대로 전기
 cond6 = df_concat2['index'] == '냉방'
 cond7 = df_concat2['index'] == '조명'
 cond8 = df_concat2['index'] == '환기'
 df_concat2.loc[cond6|cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2eq_elec_co
 
-
-
+# 에너지원별로 전개하여 산출된 온실가스를 한개의 컬럼으로 합산
 df_concat2 = df_concat2.fillna(0)
 df_concat2['tCO2eq/m2'] = df_concat2['tCO2eq_Elec/m2'] + df_concat2['tCO2eq_LPG/m2'] + df_concat2['tCO2eq_LNG/m2']  + df_concat2['tCO2eq_LOil/m2']  
 df_concat2
 
-
+# 에너지원별로 전개하여 산출된 온실가스를 한개의 컬럼으로 합산 된 값을 BASE ALT별로 총합산된 데이터 프레임
 df_tCO2eq = df_concat2.groupby('Alt')['tCO2eq/m2'].agg(sum).reset_index() 
 df_tCO2eq
 
-
+# 개선후 온실가스 배출량 - 기존 온실가스배출량 계산으로 감축량 계산
 tCO2eq_Alt = df_tCO2eq['tCO2eq/m2'].loc[0]
 tCO2eq_BASE = df_tCO2eq['tCO2eq/m2'].loc[1]
 tCO2eq_reduce = tCO2eq_Alt - tCO2eq_BASE
 
-
-
-
-# tCO2eq_reduce
-# 절감량 데쉬보드 보기
+# tCO2eq_reduce  절감량 데쉬보드 보기
 st.caption('--------', unsafe_allow_html=False)
 st.subheader('온실가스 절감량 tCO2eq/m2')
 
-
 col1, col2 = st.columns(2)
 col1.metric(label="Alt_tCO2eq/m2", 
-          value = np.round(tCO2eq_Alt, 4), 
+          value = np.round(tCO2eq_Alt, 4),
           delta = np.round(tCO2eq_reduce, 4), 
           delta_color="inverse")
 
 col2.metric(label="Reduce_tCO2eq/m2", 
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
+
+
+
 
 # # 사용처별 온실가스 절감량 확인해보기 (굳이 필요한가?)
 # # drop=True or drop col
