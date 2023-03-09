@@ -530,12 +530,12 @@ st.caption('--------', unsafe_allow_html=False)
 st.subheader('Greenhouse Gas(GHG) savings')
 
 col1, col2 = st.columns(2)
-col1.metric(label="개선후 온실가스 배출량_($tCO_2eq/m^2$)", 
+col1.metric(label="개선 후 온실가스 배출량_($tCO_2eq/m^2$)", 
           value = np.round(tCO2eq_Alt, 4),
           delta = np.round(tCO2eq_reduce, 4), 
           delta_color="inverse")
 
-col2.metric(label="온실가스 절감 원단위(계수)_($tCO_2eq/m^2$)", 
+col2.metric(label="온실가스 감축 원단위(계수)_($tCO_2eq/m^2$)", 
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
