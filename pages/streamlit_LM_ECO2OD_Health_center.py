@@ -434,7 +434,7 @@ tCO2eq_LOil_co = 3.6*0.000001 * (CO2_LOil+CH4_LOil+N2O_LOil)
 # 온실가스 계산을 위해 MW/m2 컬럼추가
 df_concat2 = df_concat.copy()
 df_concat2['MW/m2'] = df_concat2['kW/m2'] / 1000
-df_concat2
+# df_concat2
 
 
 
