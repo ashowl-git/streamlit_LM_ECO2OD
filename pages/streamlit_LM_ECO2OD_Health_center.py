@@ -74,10 +74,10 @@ from sklearn.metrics import mean_squared_log_error
 # page_names_to_funcs[selected_page]()
 
 
-# # hide the hamburger menu?
+# # hide the hamburger menu? hidden or visible
 hide_menu_style = """
         <style>
-        #MainMenu {visibility: hidden;}
+        #MainMenu {visibility: visible;}
         footer {visibility: visible;}
         footer:after {content:'Copyright 2023. EAN TECHNOLOGY Corp. All rights reserved.';
         display:block;
