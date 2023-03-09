@@ -527,7 +527,7 @@ tCO2eq_reduce = tCO2eq_Alt - tCO2eq_BASE
 
 # tCO2eq_reduce  절감량 데쉬보드 보기
 st.caption('--------', unsafe_allow_html=False)
-st.subheader('Greenhouse Gas(GHG) savings')
+st.subheader('Greenhouse Gas(GHG) Unit of measure')
 
 # col1, col2 = st.columns(2)
 
