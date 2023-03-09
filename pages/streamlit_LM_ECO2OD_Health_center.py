@@ -535,7 +535,7 @@ col1.metric(label="Alt_tCO2eq/$m^2$",
           delta = np.round(tCO2eq_reduce, 4), 
           delta_color="inverse")
 
-col2.metric(label="Reduce_tCO2eq/$m^2$", 
+col2.metric(label="Reduce_tCO2eq/m^{2}", 
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
