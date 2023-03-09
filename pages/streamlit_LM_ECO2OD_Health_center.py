@@ -534,7 +534,7 @@ tCO2eq_reduce = tCO2eq_Alt - tCO2eq_BASE
 
 # tCO2eq_reduce  절감량 데쉬보드 보기
 st.caption('--------', unsafe_allow_html=False)
-st.subheader('온실가스 절감량 tCO2eq/m2')
+st.subheader('GHG savings')
 
 col1, col2 = st.columns(2)
 col1.metric(label="Alt_tCO2eq/m2", 
