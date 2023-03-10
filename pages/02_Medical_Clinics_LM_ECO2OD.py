@@ -101,7 +101,8 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
 # 학습파일 불러오기
 # @st.cache_data
-df_raw = pd.read_excel('data/hc.xlsx')
+# sheet_name 01_Childcare_centers / 02_Medical_Clinics / 03_Hospital / 04_Senior_Centers / 05_Library / 06_Police_box / 
+df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='02_Medical_Clinics')
 
 
 st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
