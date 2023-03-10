@@ -74,35 +74,12 @@ from sklearn.metrics import mean_squared_log_error
 # page_names_to_funcs[selected_page]()
 
 
-# # hide the hamburger menu? hidden or visible
-hide_menu_style = """
-        <style>
-        #MainMenu {visibility: visible;}
-        footer {visibility: visible;}
-        footer:after {content:'Copyright 2023. EAN TECHNOLOGY Corp. All rights reserved.';
-        display:block;
-        opsition:relatiive;
-        color:orange; #tomato
-        padding:5px;
-        top:100px;}
-
-        </style>
-        """
-
-st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수")
-st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
-
-
-
-
-
-
 
 
 # 학습파일 불러오기
 # @st.cache_data
 # sheet_name 01_Childcare_centers / 02_Medical_Clinics / 03_Hospital / 04_Senior_Centers / 05_Library / 06_Police_box / 
-df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='04_Senior_Centers')
+df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='01_Childcare_centers')
 
 
 st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
@@ -127,6 +104,7 @@ df_raw2 = df_raw2.rename(columns={
     '창호열관류율':'창호열관류율_2',
     'SHGC':'SHGC_2',
     '문열관류율':'문열관류율_2',
+    '보일러효율':'보일러효율_2',
     '난방효율':'난방효율_2',
     '냉방효율':'냉방효율_2',
     '급탕효율':'급탕효율_2',
@@ -146,6 +124,7 @@ lm_features =[
     '창호열관류율',
     'SHGC',
     '문열관류율',
+    '보일러효율',
     '난방효율',
     '냉방효율',
     '급탕효율',
@@ -163,6 +142,7 @@ lm_features2 =[
     '창호열관류율_2',
     'SHGC_2',
     '문열관류율_2',
+    '보일러효율_2',
     '난방효율_2',
     '냉방효율_2',
     '급탕효율_2',
@@ -272,7 +252,8 @@ def user_input_features():
     창호열관류율 = st.sidebar.slider('창호열관류율', 0.0, 4.0, 3.0 )
     SHGC = st.sidebar.slider('SHGC', 0.0, 2.0, 0.688)
     문열관류율 = st.sidebar.slider('문열관류율', 0.0, 4.0, 3.0 )
-    난방효율 = st.sidebar.slider('난방효율', 0.0, 100.0, 87.0)
+    보일러효율 = st.sidebar.slider('보일러효율', 0.0, 100.0, 87.0)
+    난방효율 = st.sidebar.slider('난방효율', 0.0, 4.0, 3.0)
     냉방효율 = st.sidebar.slider('냉방효율', 0.0, 4.0, 3.0 )
     급탕효율 = st.sidebar.slider('급탕효율', 0.0, 100.0, 87.0 )
     조명밀도 = st.sidebar.slider('조명밀도',  0.0, 20.0, 10.0, )
@@ -287,6 +268,7 @@ def user_input_features():
             '창호열관류율': 창호열관류율,
             'SHGC': SHGC,
             '문열관류율': 문열관류율,
+            '보일러효율': 보일러효율,
             '난방효율': 난방효율,
             '냉방효율': 냉방효율,
             '급탕효율': 급탕효율,
@@ -315,7 +297,8 @@ def user_input_features2():
     창호열관류율_2 = st.sidebar.slider('창호열관류율_2', 0.0, 4.0, 3.0 )
     SHGC_2 = st.sidebar.slider('SHGC_2', 0.0, 2.0, 0.688)
     문열관류율_2 = st.sidebar.slider('문열관류율_2', 0.0, 4.0, 3.0 )
-    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 100.0, 87.0)
+    보일러효율_2 = st.sidebar.slider('보일러효율_2', 0.0, 100.0, 87.0)
+    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 4.0, 3.0)
     냉방효율_2 = st.sidebar.slider('냉방효율_2', 0.0, 4.0, 3.0 )
     급탕효율_2 = st.sidebar.slider('급탕효율_2', 0.0, 100.0, 87.0 )
     조명밀도_2 = st.sidebar.slider('조명밀도_2',  0.0, 20.0, 10.0, )
@@ -330,6 +313,7 @@ def user_input_features2():
             '창호열관류율_2': 창호열관류율_2,
             'SHGC_2': SHGC_2,
             '문열관류율_2': 문열관류율_2,
+            '보일러효율_2': 보일러효율_2,
             '난방효율_2': 난방효율_2,
             '냉방효율_2': 냉방효율_2,
             '급탕효율_2': 급탕효율_2,
@@ -445,14 +429,14 @@ st.caption('--------', unsafe_allow_html=False)
 st.subheader('BASE_ 난방및 급탕을 위한 연료종류의 비율')
 
 col1, col2, col3, col4 = st.columns(4)
-base_heat_elec_ratio = col1.number_input('BASE_ 난방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
-base_heat_LNG_ratio = col2.number_input('BASE_ 난방용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+base_heat_elec_ratio = col1.number_input('BASE_ 난방용_전기비율',min_value=0.0, max_value=1.0,value=0.24)
+base_heat_LNG_ratio = col2.number_input('BASE_ 난방용_LNG비율',min_value=0.0, max_value=1.0,value=0.76)
 base_heat_LPG_ratio = col3.number_input('BASE_ 난방용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 base_heat_LOil_ratio = col4.number_input('BASE_ 난방용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
 col1, col2, col3, col4 = st.columns(4)
-base_DHW_elec_ratio = col1.number_input('BASE_ 급탕용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
-base_DHW_LNG_ratio = col2.number_input('BASE_ 급탕용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+base_DHW_elec_ratio = col1.number_input('BASE_ 급탕용_전기비율',min_value=0.0, max_value=1.0,value=0.32)
+base_DHW_LNG_ratio = col2.number_input('BASE_ 급탕용_LNG비율',min_value=0.0, max_value=1.0,value=0.68)
 base_DHW_LPG_ratio = col3.number_input('BASE_ 급탕용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 base_DHW_LOil_ratio = col4.number_input('BASE_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 

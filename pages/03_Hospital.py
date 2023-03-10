@@ -74,35 +74,12 @@ from sklearn.metrics import mean_squared_log_error
 # page_names_to_funcs[selected_page]()
 
 
-# # hide the hamburger menu? hidden or visible
-hide_menu_style = """
-        <style>
-        #MainMenu {visibility: visible;}
-        footer {visibility: visible;}
-        footer:after {content:'Copyright 2023. EAN TECHNOLOGY Corp. All rights reserved.';
-        display:block;
-        opsition:relatiive;
-        color:orange; #tomato
-        padding:5px;
-        top:100px;}
-
-        </style>
-        """
-
-st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수")
-st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
-
-
-
-
-
-
 
 
 # 학습파일 불러오기
 # @st.cache_data
 # sheet_name 01_Childcare_centers / 02_Medical_Clinics / 03_Hospital / 04_Senior_Centers / 05_Library / 06_Police_box / 
-df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='04_Senior_Centers')
+df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='03_Hospital')
 
 
 st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
@@ -127,7 +104,10 @@ df_raw2 = df_raw2.rename(columns={
     '창호열관류율':'창호열관류율_2',
     'SHGC':'SHGC_2',
     '문열관류율':'문열관류율_2',
+    '보일러효율':'보일러효율_2',
+    '흡수식냉온수기효율_난방':'흡수식냉온수기효율_난방_2',
     '난방효율':'난방효율_2',
+    '흡수식냉온수기효율_냉방':'흡수식냉온수기효율_냉방_2',
     '냉방효율':'냉방효율_2',
     '급탕효율':'급탕효율_2',
     '조명밀도':'조명밀도_2',
@@ -146,7 +126,10 @@ lm_features =[
     '창호열관류율',
     'SHGC',
     '문열관류율',
+    '보일러효율',
+    '흡수식냉온수기효율_난방',
     '난방효율',
+    '흡수식냉온수기효율_냉방',
     '냉방효율',
     '급탕효율',
     '조명밀도',
@@ -163,7 +146,10 @@ lm_features2 =[
     '창호열관류율_2',
     'SHGC_2',
     '문열관류율_2',
+    '보일러효율_2',
+    '흡수식냉온수기효율_난방_2',
     '난방효율_2',
+    '흡수식냉온수기효율_냉방_2',
     '냉방효율_2',
     '급탕효율_2',
     '조명밀도_2',
@@ -272,7 +258,10 @@ def user_input_features():
     창호열관류율 = st.sidebar.slider('창호열관류율', 0.0, 4.0, 3.0 )
     SHGC = st.sidebar.slider('SHGC', 0.0, 2.0, 0.688)
     문열관류율 = st.sidebar.slider('문열관류율', 0.0, 4.0, 3.0 )
-    난방효율 = st.sidebar.slider('난방효율', 0.0, 100.0, 87.0)
+    보일러효율 = st.sidebar.slider('보일러효율', 0.0, 100.0, 87.0)
+    흡수식냉온수기효율_난방 = st.sidebar.slider('흡수식냉온수기효율_난방', 0.0, 100.0, 87.0)
+    난방효율 = st.sidebar.slider('난방효율', 0.0, 4.0, 3.0)
+    흡수식냉온수기효율_냉방 = st.sidebar.slider('흡수식냉온수기효율_냉방', 0.0, 2.0, 1.0)
     냉방효율 = st.sidebar.slider('냉방효율', 0.0, 4.0, 3.0 )
     급탕효율 = st.sidebar.slider('급탕효율', 0.0, 100.0, 87.0 )
     조명밀도 = st.sidebar.slider('조명밀도',  0.0, 20.0, 10.0, )
@@ -287,7 +276,10 @@ def user_input_features():
             '창호열관류율': 창호열관류율,
             'SHGC': SHGC,
             '문열관류율': 문열관류율,
+            '보일러효율': 보일러효율,
+            '흡수식냉온수기효율_난방':흡수식냉온수기효율_난방,
             '난방효율': 난방효율,
+            '흡수식냉온수기효율_냉방':흡수식냉온수기효율_냉방,
             '냉방효율': 냉방효율,
             '급탕효율': 급탕효율,
             '조명밀도': 조명밀도,
@@ -315,7 +307,10 @@ def user_input_features2():
     창호열관류율_2 = st.sidebar.slider('창호열관류율_2', 0.0, 4.0, 3.0 )
     SHGC_2 = st.sidebar.slider('SHGC_2', 0.0, 2.0, 0.688)
     문열관류율_2 = st.sidebar.slider('문열관류율_2', 0.0, 4.0, 3.0 )
-    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 100.0, 87.0)
+    보일러효율_2 = st.sidebar.slider('보일러효율_2', 0.0, 100.0, 87.0)
+    흡수식냉온수기효율_난방_2 = st.sidebar.slider('흡수식냉온수기효율_난방_2', 0.0, 100.0, 87.0)
+    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 4.0, 3.0)
+    흡수식냉온수기효율_냉방_2 = st.sidebar.slider('흡수식냉온수기효율_냉방_2', 0.0, 2.0, 1.0)
     냉방효율_2 = st.sidebar.slider('냉방효율_2', 0.0, 4.0, 3.0 )
     급탕효율_2 = st.sidebar.slider('급탕효율_2', 0.0, 100.0, 87.0 )
     조명밀도_2 = st.sidebar.slider('조명밀도_2',  0.0, 20.0, 10.0, )
@@ -330,7 +325,10 @@ def user_input_features2():
             '창호열관류율_2': 창호열관류율_2,
             'SHGC_2': SHGC_2,
             '문열관류율_2': 문열관류율_2,
+            '보일러효율_2': 보일러효율_2,
+            '흡수식냉온수기효율_난방_2':흡수식냉온수기효율_난방_2,
             '난방효율_2': 난방효율_2,
+            '흡수식냉온수기효율_냉방_2':흡수식냉온수기효율_냉방_2,
             '냉방효율_2': 냉방효율_2,
             '급탕효율_2': 급탕효율_2,
             '조명밀도_2': 조명밀도_2,

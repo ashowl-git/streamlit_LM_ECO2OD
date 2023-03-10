@@ -272,8 +272,8 @@ def user_input_features():
     창호열관류율 = st.sidebar.slider('창호열관류율', 0.0, 4.0, 3.0 )
     SHGC = st.sidebar.slider('SHGC', 0.0, 2.0, 0.688)
     문열관류율 = st.sidebar.slider('문열관류율', 0.0, 4.0, 3.0 )
-    난방효율 = st.sidebar.slider('난방효율', 0.0, 100.0, 87.0)
-    냉방효율 = st.sidebar.slider(' 냉방효율', 0.0, 4.0, 3.0 )
+    난방효율 = st.sidebar.slider('난방효율', 0.0, 4.0, 3.0)
+    냉방효율 = st.sidebar.slider('냉방효율', 0.0, 4.0, 3.0 )
     급탕효율 = st.sidebar.slider('급탕효율', 0.0, 100.0, 87.0 )
     조명밀도 = st.sidebar.slider('조명밀도',  0.0, 20.0, 10.0, )
     중부1 = st.sidebar.select_slider('중부1', options=[0, 1])
@@ -288,7 +288,7 @@ def user_input_features():
             'SHGC': SHGC,
             '문열관류율': 문열관류율,
             '난방효율': 난방효율,
-            ' 냉방효율': 냉방효율,
+            '냉방효율': 냉방효율,
             '급탕효율': 급탕효율,
             '조명밀도': 조명밀도,
             '중부1': 중부1,
@@ -315,8 +315,8 @@ def user_input_features2():
     창호열관류율_2 = st.sidebar.slider('창호열관류율_2', 0.0, 4.0, 3.0 )
     SHGC_2 = st.sidebar.slider('SHGC_2', 0.0, 2.0, 0.688)
     문열관류율_2 = st.sidebar.slider('문열관류율_2', 0.0, 4.0, 3.0 )
-    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 100.0, 87.0)
-    냉방효율_2 = st.sidebar.slider(' 냉방효율_2', 0.0, 4.0, 3.0 )
+    난방효율_2 = st.sidebar.slider('난방효율_2', 0.0, 4.0, 3.0)
+    냉방효율_2 = st.sidebar.slider('냉방효율_2', 0.0, 4.0, 3.0 )
     급탕효율_2 = st.sidebar.slider('급탕효율_2', 0.0, 100.0, 87.0 )
     조명밀도_2 = st.sidebar.slider('조명밀도_2',  0.0, 20.0, 10.0, )
     중부1_2 = st.sidebar.select_slider('중부1_2', options=[0, 1])
@@ -331,7 +331,7 @@ def user_input_features2():
             'SHGC_2': SHGC_2,
             '문열관류율_2': 문열관류율_2,
             '난방효율_2': 난방효율_2,
-            ' 냉방효율_2': 냉방효율_2,
+            '냉방효율_2': 냉방효율_2,
             '급탕효율_2': 급탕효율_2,
             '조명밀도_2': 조명밀도_2,
             '중부1_2': 중부1_2,
