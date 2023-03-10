@@ -105,8 +105,8 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='06_Police_box')
 
 
-st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
-st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합니다 ', unsafe_allow_html=False)
+# st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
+# st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합니다 ', unsafe_allow_html=False)
 
 # 학습할 파일을 직접 업로드 하고 싶을때
 
