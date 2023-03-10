@@ -73,7 +73,23 @@ from sklearn.metrics import mean_squared_log_error
 # selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
 # page_names_to_funcs[selected_page]()
 
+# # hide the hamburger menu? hidden or visible
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: visible;}
+        footer {visibility: visible;}
+        footer:after {content:'Copyright 2023. EAN TECHNOLOGY Corp. All rights reserved.';
+        display:block;
+        opsition:relatiive;
+        color:orange; #tomato
+        padding:5px;
+        top:100px;}
 
+        </style>
+        """
+
+st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수")
+st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
 
 # 학습파일 불러오기
