@@ -442,7 +442,7 @@ df_concat2['MW/m2'] = df_concat2['kW/m2'] / 1000
 
 #연료 비율 정의
 st.caption('--------', unsafe_allow_html=False)
-st.subheader('BASE_ 난방및 급탕을 위한 연료종류의 비율')
+st.subheader('BASE_ 난방 급탕 냉방을 위한 연료종류의 비율')
 
 col1, col2, col3, col4 = st.columns(4)
 base_heat_elec_ratio = col1.number_input('BASE_ 난방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
@@ -456,7 +456,14 @@ base_DHW_LNG_ratio = col2.number_input('BASE_ 급탕용_LNG비율',min_value=0.0
 base_DHW_LPG_ratio = col3.number_input('BASE_ 급탕용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 base_DHW_LOil_ratio = col4.number_input('BASE_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
-st.subheader('ALT_ 난방및 급탕을 위한 연료종류의 비율')
+col1, col2, col3, col4 = st.columns(4)
+base_cooling_elec_ratio = col1.number_input('BASE_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
+base_cooling_LNG_ratio = col2.number_input('BASE_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+base_cooling_LPG_ratio = col3.number_input('BASE_ 냉방용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
+base_cooling_LOil_ratio = col4.number_input('BASE_ 냉방용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
+
+
+st.subheader('ALT_ 난방 급탕 냉방을 위한 연료종류의 비율')
 
 col1, col2, col3, col4 = st.columns(4)
 alt_heat_elec_ratio = col1.number_input('alt_ 난방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
@@ -470,43 +477,57 @@ alt_DHW_LNG_ratio = col2.number_input('alt_ 급탕용_LNG비율',min_value=0.0, 
 alt_DHW_LPG_ratio = col3.number_input('alt_ 급탕용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 alt_DHW_LOil_ratio = col4.number_input('alt_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
-
+col1, col2, col3, col4 = st.columns(4)
+alt_cooling_elec_ratio = col1.number_input('alt_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
+alt_cooling_LNG_ratio = col2.number_input('alt_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+alt_cooling_LPG_ratio = col3.number_input('alt_ 냉방용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
+alt_cooling_LOil_ratio = col4.number_input('alt_ 냉방용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
 cond2 = df_concat2['index'] == '난방'
 cond3 = df_concat2['index'] == '급탕'
+cond3_1 = df_concat2['index'] == '냉방'
+
 cond4 = df_concat2['Alt'] == 'BASE'
 cond5 = df_concat2['Alt'] == 'Alt_1'
 
-# BASE 난방 열원의 연료종류 비율 조정
+# BASE 난방 급탕 냉방 열원의 연료종류 비율 조정
 df_concat2.loc[cond2&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_heat_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_heat_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_heat_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_heat_LOil_ratio * tCO2eq_LOil_co
 
-# BASE 급탕 열원의 연료종류 비율 조정
 df_concat2.loc[cond3&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_DHW_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_DHW_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_DHW_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond3&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_DHW_LOil_ratio * tCO2eq_LOil_co
 
-# Alt_1 난방 열원의 연료종류 비율 조정
+df_concat2.loc[cond3_1&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_cooling_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_cooling_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_cooling_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_cooling_LOil_ratio * tCO2eq_LOil_co
+
+# Alt_1 난방 급탕 냉방 열원의 연료종류 비율 조정
 df_concat2.loc[cond2&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_heat_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_heat_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_heat_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond2&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_heat_LOil_ratio * tCO2eq_LOil_co
 
-# Alt_1 급탕 열원의 연료종류 비율 조정
 df_concat2.loc[cond3&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_DHW_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_DHW_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_DHW_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_DHW_LOil_ratio * tCO2eq_LOil_co
 
+df_concat2.loc[cond3_1&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_cooling_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_cooling_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_cooling_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_cooling_LOil_ratio * tCO2eq_LOil_co
+
 
 # 전기사용하는 냉방 조명 환기 index는 그대로 전기
-cond6 = df_concat2['index'] == '냉방'
+# cond6 = df_concat2['index'] == '냉방'
 cond7 = df_concat2['index'] == '조명'
 cond8 = df_concat2['index'] == '환기'
-df_concat2.loc[cond6|cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2eq_elec_co
+df_concat2.loc[cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2eq_elec_co
 
 
 
