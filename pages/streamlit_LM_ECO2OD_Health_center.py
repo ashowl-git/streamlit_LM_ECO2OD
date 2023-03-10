@@ -393,9 +393,9 @@ fig.update_layout(barmode='group') #alt별 구분
 st.plotly_chart(fig, use_container_width=True)
 
 df_groupby_sum = df_concat.groupby('Alt')['kW/m2'].sum()
-
-st.dataframe(df_groupby_sum)
-
+df_groupby_sum
+df_groupby_sum_delta = df_groupby_sum.loc['Alt_1'] - df_groupby_sum.loc['BASE']
+df_groupby_sum_delta
 # st.caption('----------------------------------------------------------------------- ', unsafe_allow_html=False)
 
 
