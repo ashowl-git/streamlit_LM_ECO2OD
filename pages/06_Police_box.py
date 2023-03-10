@@ -116,7 +116,7 @@ st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합�
 #   st.write(df_raw)
 
 # # df_raw.columns
-# df_raw2 = df_raw.copy()
+df_raw2 = df_raw.copy()
 
 
 # Alt 용 독립변수 데이터셋 컬럼명 수정
