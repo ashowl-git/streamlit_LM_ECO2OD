@@ -105,15 +105,15 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 df_raw = pd.read_excel('data/OD_data.xlsx', sheet_name='04_Senior_Centers')
 
 
-st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
-st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합니다 ', unsafe_allow_html=False)
+# st.subheader('LinearRegression 학습 대상 파일 직접 업로드 하기')
+# st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합니다 ', unsafe_allow_html=False)
 
-# 학습할 파일을 직접 업로드 하고 싶을때
+# # 학습할 파일을 직접 업로드 하고 싶을때
 
-uploaded_file = st.file_uploader("Choose a file")
-if uploaded_file is not None:
-  df_raw = pd.read_excel(uploaded_file)
-  st.write(df_raw)
+# uploaded_file = st.file_uploader("Choose a file")
+# if uploaded_file is not None:
+#   df_raw = pd.read_excel(uploaded_file)
+#   st.write(df_raw)
 
 # df_raw.columns
 df_raw2 = df_raw.copy()
@@ -227,18 +227,18 @@ print('MAE : {0:.3f}, MAPE : {1:.3f}'.format(mae, mape))
 print('Variance score(r2_score) : {0:.3f}'.format(r2_score(y_test, y_preds)))
 r2 = r2_score(y_test, y_preds)
 
-st.caption('--------------------------------------------------------------------', unsafe_allow_html=False)
-st.subheader('LinearRegression model 평가')
+# st.caption('--------------------------------------------------------------------', unsafe_allow_html=False)
+# st.subheader('LinearRegression model 평가')
 
-col1, col2 = st.columns(2)
-col1.metric(label='Variance score(r2_score)', value = np.round(r2, 3))
-col2.metric(label='mean_squared_error', value = np.round(mse, 3))
+# col1, col2 = st.columns(2)
+# col1.metric(label='Variance score(r2_score)', value = np.round(r2, 3))
+# col2.metric(label='mean_squared_error', value = np.round(mse, 3))
 
-col3, col4 = st.columns(2)
-col3.metric(label='root mean_squared_error', value = np.round(rmse, 3))
-col4.metric(label='mean_absolute_error', value = np.round(mae, 3))
+# col3, col4 = st.columns(2)
+# col3.metric(label='root mean_squared_error', value = np.round(rmse, 3))
+# col4.metric(label='mean_absolute_error', value = np.round(mae, 3))
 
-st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
+# st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
 
 
 # print('절편값:',lr.intercept_)

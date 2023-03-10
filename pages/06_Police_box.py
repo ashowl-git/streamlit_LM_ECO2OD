@@ -110,13 +110,13 @@ st.caption('업로드 하지 않아도 기본 학습 Data-set 으로 작동합�
 
 # 학습할 파일을 직접 업로드 하고 싶을때
 
-uploaded_file = st.file_uploader("Choose a file")
-if uploaded_file is not None:
-  df_raw = pd.read_excel(uploaded_file)
-  st.write(df_raw)
+# uploaded_file = st.file_uploader("Choose a file")
+# if uploaded_file is not None:
+#   df_raw = pd.read_excel(uploaded_file)
+#   st.write(df_raw)
 
-# df_raw.columns
-df_raw2 = df_raw.copy()
+# # df_raw.columns
+# df_raw2 = df_raw.copy()
 
 
 # Alt 용 독립변수 데이터셋 컬럼명 수정
