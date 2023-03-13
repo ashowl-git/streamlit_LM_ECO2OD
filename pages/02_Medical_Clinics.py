@@ -254,7 +254,7 @@ coeff2.columns = lm_result_features2
 
 # st.subheader('LinearRegression 회귀계수')
 # st.caption('--------', unsafe_allow_html=False)
-coeff
+# coeff
 # # coeff2
 
 
