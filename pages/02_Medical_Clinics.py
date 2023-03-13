@@ -309,7 +309,7 @@ st.sidebar.header('Specify Input Parameters_변경후')
 
 def user_input_features2():
     # ACH50 = st.sidebar.slider('ACH50', X_data.ACH50.min(), X_data.ACH50.max(), X_data.ACH50.mean())
-    외벽_2= st.sidebar.slider('외벽_2', 0.0, 6.0, 0.233 )
+    외벽_2= st.sidebar.slider('외벽_2', 0.0, 6.0, 0.17 )
     지붕_2 = st.sidebar.slider('지붕_2', 0.0, 6.0, 0.206)
     바닥_2 = st.sidebar.slider('바닥_2', 0.0, 6.0, 0.237)
     창호열관류율_2 = st.sidebar.slider('창호열관류율_2', 0.0, 6.0, 1.5 )
