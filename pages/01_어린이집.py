@@ -78,7 +78,7 @@ hide_menu_style = """
         <style>
         #MainMenu {visibility: visible;}
         footer {visibility: visible;}
-        footer:after {content:'Copyright 2023. EAN TECHNOLOGY Corp. All rights reserved.';
+        footer:after {content:'Copyright 2023. (주)이에이엔테크놀로지. All rights reserved.';
         display:block;
         opsition:relatiive;
         color:orange; #tomato
@@ -88,7 +88,7 @@ hide_menu_style = """
         </style>
         """
 
-st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수")
+st.set_page_config(layout="wide", page_title="국토안전관리원_온실가스감축계수 ")
 st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 
 
