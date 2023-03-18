@@ -97,3 +97,15 @@ st.markdown(hide_menu_style, unsafe_allow_html=True) # hide the hamburger menu?
 # st.subheader('국토안전관리원 온실가스절감 예측')
 # st.markdown('Streamlit is **_really_ cool**.')
 st.markdown('국토안전관리원 **_온실가스절감량_ 예측**.')
+st.markdown('요약')
+st.markdown('01_ ECO2OD 아이템별, 아이템조합 시뮬레이션 ')
+st.markdown('02_ 머신러닝 회귀모델 구축')
+st.markdown('03_ 회귀모델로 소요량 예측 개선전(BASE), 개선후(ALT)')
+st.markdown('04_ 사용처별 연료비율 정의')
+st.markdown('05_ 에너지소요량과 정의된 연료비율에 따라 이산화탄소(CO2), 메탄(CH4), 산화질소(N2O) 발생량 산정')
+st.markdown('06_ 온실가스 배출량 산정 (개전전-개선후) ')
+
+
+
+
+
