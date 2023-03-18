@@ -471,8 +471,8 @@ base_DHW_LPG_ratio = col3.number_input('BASE_ 급탕용_LPG비율',min_value=0.0
 base_DHW_LOil_ratio = col4.number_input('BASE_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
 col1, col2, col3, col4 = st.columns(4)
-base_cooling_elec_ratio = col1.number_input('BASE_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
-base_cooling_LNG_ratio = col2.number_input('BASE_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+base_cooling_elec_ratio = col1.number_input('BASE_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.4)
+base_cooling_LNG_ratio = col2.number_input('BASE_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.6)
 base_cooling_LPG_ratio = col3.number_input('BASE_ 냉방용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 base_cooling_LOil_ratio = col4.number_input('BASE_ 냉방용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
@@ -492,8 +492,8 @@ alt_DHW_LPG_ratio = col3.number_input('alt_ 급탕용_LPG비율',min_value=0.0, 
 alt_DHW_LOil_ratio = col4.number_input('alt_ 급탕용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
 col1, col2, col3, col4 = st.columns(4)
-alt_cooling_elec_ratio = col1.number_input('alt_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.8)
-alt_cooling_LNG_ratio = col2.number_input('alt_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.2)
+alt_cooling_elec_ratio = col1.number_input('alt_ 냉방용_전기비율',min_value=0.0, max_value=1.0,value=0.4)
+alt_cooling_LNG_ratio = col2.number_input('alt_ 냉방용_LNG비율',min_value=0.0, max_value=1.0,value=0.6)
 alt_cooling_LPG_ratio = col3.number_input('alt_ 냉방용_LPG비율',min_value=0.0, max_value=1.0,value=0.0)
 alt_cooling_LOil_ratio = col4.number_input('alt_ 냉방용_등유비율',min_value=0.0, max_value=1.0,value=0.0)
 
