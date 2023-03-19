@@ -126,16 +126,22 @@ st.caption('----------------------------------------', unsafe_allow_html=False)
 #    st.markdown("(주)이에이엔테크놀로지")
 #    st.image("image/ean.png")
 
+st.markdown("국토안전관리원")
+st.image("image/국토안전관리원.png")
+
 tab1, tab2, tab3 = st.tabs(["동아대학교", "서울대학교", "(주)이에이엔테크놀로지"])
 
 with tab1:
-   st.text("동아대학교")
+   # st.text("동아대학교")
    st.image("image/동아대학교.jpg", width=200)
+   st.markdown('교수 이건호')
 
 with tab2:
-   st.header("서울대학교")
+   # st.header("서울대학교")
    st.image("image/서울대학교.jpeg", width=200)
+   st.markdown('교수 박철수')
 
 with tab3:
-   st.header("(주)이에이엔테크놀로지")
+   # st.header("(주)이에이엔테크놀로지")
    st.image("image/ean.png", width=200)
+   st.markdown('대표 신지웅')
