@@ -352,14 +352,14 @@ st.caption('좌측의 변수항목 슬라이더 조정 ', unsafe_allow_html=Fals
 
 
 # 예측된 결과를 데이터 프레임으로 만들어 보기
-df_result = pd.DataFrame(result, columns=lm_result_features).T.rename(columns={0:'kW/m2'})
-df_result2 = pd.DataFrame(result2, columns=lm_result_features2).T.rename(columns={0:'kW/m2'})
+df_result = pd.DataFrame(result, columns=lm_result_features).T.rename(columns={0:'kWh/m2'})
+df_result2 = pd.DataFrame(result2, columns=lm_result_features2).T.rename(columns={0:'kWh/m2'})
 
 
 df_result['Alt'] = 'BASE'
 df_result2['Alt'] = 'Alt_1'
-# df_result['kW/m2'] = df_result['kW'] / df_input['Occupied_floor_area'][0]
-# df_result2['kW/m2'] = df_result2['kW'] / df2_input['Occupied_floor_area_2'][0]
+# df_result['kWh/m2'] = df_result['kWh'] / df_input['Occupied_floor_area'][0]
+# df_result2['kWh/m2'] = df_result2['kWh'] / df2_input['Occupied_floor_area_2'][0]
 
 # df_result
 # df_result2
@@ -367,8 +367,8 @@ df_result2['Alt'] = 'Alt_1'
 df_concat = pd.concat([df_result,df_result2])
 
 # 추세에 따라 음수값이 나오는것은 0으로 수정
-cond1 = df_concat['kW/m2'] < 0
-df_concat.loc[cond1,'kW/m2'] = 0
+cond1 = df_concat['kWh/m2'] < 0
+df_concat.loc[cond1,'kWh/m2'] = 0
 
 # st.checkbox("Use container width _ BASE", value=False, key="use_container_width")
 # st.dataframe(df_concat, use_container_width=st.session_state.use_container_width)
@@ -381,19 +381,19 @@ df2_concat = df_concat.round(2)
 st.caption('---------------------------------------------------------------------- ', unsafe_allow_html=False)
 st.subheader('사용처별 에너지 사용량 예측값 그래프')
 
-fig = px.bar(df_concat, x='index', y='kW/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kW/m2'],   color='Alt' )
+fig = px.bar(df_concat, x='index', y='kWh/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kWh/m2'],   color='Alt' )
 fig.update_xaxes(rangeslider_visible=True)
 fig.update_layout(barmode='group') #alt별 구분
 # fig
 st.plotly_chart(fig, use_container_width=True)
 
-fig = px.bar(df_concat, x='Alt', y='kW/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kW/m2'],   color='index' )
+fig = px.bar(df_concat, x='Alt', y='kWh/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kWh/m2'],   color='index' )
 fig.update_xaxes(rangeslider_visible=True)
 fig.update_layout(barmode='group') #alt별 구분
 # fig
 st.plotly_chart(fig, use_container_width=True)
 
-df_groupby_sum = df_concat.groupby('Alt')['kW/m2'].sum()
+df_groupby_sum = df_concat.groupby('Alt')['kWh/m2'].sum()
 df_groupby_sum
 df_groupby_sum_delta = df_groupby_sum.loc['BASE'] - df_groupby_sum.loc['Alt_1']
 df_groupby_sum_delta
@@ -414,27 +414,27 @@ CH4_elec = 0.0000036 * CH4_GWP
 N2O_elec = 0.0000085 * N2O_GWP
 tCO2eq_elec_co = (CO2_elec+CH4_elec+N2O_elec)
 
-# 가스 LNG kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
+# 가스 LNG kgGHG/TJ __MWh -> MJ로 환산필요 (3.6*0.000001)
 CO2_LNG = 56100 * CO2_GWP
 CH4_LNG = 5 * CH4_GWP
 N2O_LNG = 0.1 * N2O_GWP
 tCO2eq_LNG_co = 3.6*0.000001 * (CO2_LNG+CH4_LNG+N2O_LNG)
 
-# 가스 LPG kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
+# 가스 LPG kgGHG/TJ __MWh -> MJ로 환산필요 (3.6*0.000001)
 CO2_LPG = 63100 * CO2_GWP
 CH4_LPG = 5 * CH4_GWP
 N2O_LPG = 0.1 * N2O_GWP
 tCO2eq_LPG_co = 3.6*0.000001 * (CO2_LPG+CH4_LPG+N2O_LPG)
 
-# 가스 등유 kgGHG/TJ kgGHG/TJ __MW -> MJ로 환산필요 (3.6*0.000001)
+# 가스 등유 kgGHG/TJ kgGHG/TJ __MWh -> MJ로 환산필요 (3.6*0.000001)
 CO2_LOil = 71900 * CO2_GWP
 CH4_LOil = 10 * CH4_GWP
 N2O_LOil = 0.6 * N2O_GWP
 tCO2eq_LOil_co = 3.6*0.000001 * (CO2_LOil+CH4_LOil+N2O_LOil)
 
-# 온실가스 계산을 위해 MW/m2 컬럼추가
+# 온실가스 계산을 위해 MWh/m2 컬럼추가
 df_concat2 = df_concat.copy()
-df_concat2['MW/m2'] = df_concat2['kW/m2'] / 1000
+df_concat2['MWh/m2'] = df_concat2['kWh/m2'] / 1000
 # df_concat2
 
 
@@ -491,43 +491,43 @@ cond4 = df_concat2['Alt'] == 'BASE'
 cond5 = df_concat2['Alt'] == 'Alt_1'
 
 # BASE 난방 급탕 냉방 열원의 연료종류 비율 조정
-df_concat2.loc[cond2&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_heat_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond2&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_heat_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond2&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_heat_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond2&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_heat_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond2&cond4,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * base_heat_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond2&cond4,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * base_heat_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond2&cond4,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * base_heat_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond2&cond4,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * base_heat_LOil_ratio * tCO2eq_LOil_co
 
-df_concat2.loc[cond3&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_DHW_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond3&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_DHW_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond3&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_DHW_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond3&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_DHW_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond3&cond4,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * base_DHW_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3&cond4,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * base_DHW_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3&cond4,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * base_DHW_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3&cond4,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * base_DHW_LOil_ratio * tCO2eq_LOil_co
 
-df_concat2.loc[cond3_1&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * base_cooling_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * base_cooling_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * base_cooling_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * base_cooling_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * base_cooling_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * base_cooling_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * base_cooling_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3_1&cond4,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * base_cooling_LOil_ratio * tCO2eq_LOil_co
 
 # Alt_1 난방 급탕 냉방 열원의 연료종류 비율 조정
-df_concat2.loc[cond2&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_heat_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond2&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_heat_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond2&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_heat_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond2&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_heat_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond2&cond5,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * alt_heat_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond2&cond5,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * alt_heat_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond2&cond5,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * alt_heat_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond2&cond5,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * alt_heat_LOil_ratio * tCO2eq_LOil_co
 
-df_concat2.loc[cond3&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_DHW_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond3&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_DHW_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond3&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_DHW_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond3&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_DHW_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond3&cond5,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * alt_DHW_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3&cond5,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * alt_DHW_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3&cond5,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * alt_DHW_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3&cond5,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * alt_DHW_LOil_ratio * tCO2eq_LOil_co
 
-df_concat2.loc[cond3_1&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_cooling_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond3_1&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_cooling_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond3_1&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_cooling_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond3_1&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_cooling_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * alt_cooling_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * alt_cooling_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * alt_cooling_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LOil/m2'] = df_concat2['MWh/m2'] * alt_cooling_LOil_ratio * tCO2eq_LOil_co
 
 
 # 전기사용하는 냉방 조명 환기 index는 그대로 전기
 # cond6 = df_concat2['index'] == '냉방'
 cond7 = df_concat2['index'] == '조명'
 cond8 = df_concat2['index'] == '환기'
-df_concat2.loc[cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * tCO2eq_elec_co
+df_concat2.loc[cond7|cond8,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * tCO2eq_elec_co
 
 
 
