@@ -352,14 +352,14 @@ st.caption('좌측의 변수항목 슬라이더 조정 ', unsafe_allow_html=Fals
 
 
 # 예측된 결과를 데이터 프레임으로 만들어 보기
-df_result = pd.DataFrame(result, columns=lm_result_features).T.rename(columns={0:'kW/m2'})
-df_result2 = pd.DataFrame(result2, columns=lm_result_features2).T.rename(columns={0:'kW/m2'})
+df_result = pd.DataFrame(result, columns=lm_result_features).T.rename(columns={0:'kWh/m2'})
+df_result2 = pd.DataFrame(result2, columns=lm_result_features2).T.rename(columns={0:'kWh/m2'})
 
 
 df_result['Alt'] = 'BASE'
 df_result2['Alt'] = 'Alt_1'
-# df_result['kW/m2'] = df_result['kW'] / df_input['Occupied_floor_area'][0]
-# df_result2['kW/m2'] = df_result2['kW'] / df2_input['Occupied_floor_area_2'][0]
+# df_result['kWh/m2'] = df_result['kWh'] / df_input['Occupied_floor_area'][0]
+# df_result2['kWh/m2'] = df_result2['kWh'] / df2_input['Occupied_floor_area_2'][0]
 
 # df_result
 # df_result2
@@ -367,8 +367,8 @@ df_result2['Alt'] = 'Alt_1'
 df_concat = pd.concat([df_result,df_result2])
 
 # 추세에 따라 음수값이 나오는것은 0으로 수정
-cond1 = df_concat['kW/m2'] < 0
-df_concat.loc[cond1,'kW/m2'] = 0
+cond1 = df_concat['kWh/m2'] < 0
+df_concat.loc[cond1,'kWh/m2'] = 0
 
 # st.checkbox("Use container width _ BASE", value=False, key="use_container_width")
 # st.dataframe(df_concat, use_container_width=st.session_state.use_container_width)
@@ -381,19 +381,19 @@ df2_concat = df_concat.round(2)
 st.caption('---------------------------------------------------------------------- ', unsafe_allow_html=False)
 st.subheader('사용처별 에너지 사용량 예측값 그래프')
 
-fig = px.bar(df_concat, x='index', y='kW/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kW/m2'],   color='Alt' )
+fig = px.bar(df_concat, x='index', y='kWh/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kWh/m2'],   color='Alt' )
 fig.update_xaxes(rangeslider_visible=True)
 fig.update_layout(barmode='group') #alt별 구분
 # fig
 st.plotly_chart(fig, use_container_width=True)
 
-fig = px.bar(df_concat, x='Alt', y='kW/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kW/m2'],   color='index' )
+fig = px.bar(df_concat, x='Alt', y='kWh/m2', title='BASE_ALT 원별비교 Bar', hover_data=['kWh/m2'],   color='index' )
 fig.update_xaxes(rangeslider_visible=True)
 fig.update_layout(barmode='group') #alt별 구분
 # fig
 st.plotly_chart(fig, use_container_width=True)
 
-df_groupby_sum = df_concat.groupby('Alt')['kW/m2'].sum()
+df_groupby_sum = df_concat.groupby('Alt')['kWh/m2'].sum()
 df_groupby_sum
 df_groupby_sum_delta = df_groupby_sum.loc['BASE'] - df_groupby_sum.loc['Alt_1']
 df_groupby_sum_delta
@@ -434,7 +434,7 @@ tCO2eq_LOil_co = 3.6*0.000001 * (CO2_LOil+CH4_LOil+N2O_LOil)
 
 # 온실가스 계산을 위해 MWh/m2 컬럼추가
 df_concat2 = df_concat.copy()
-df_concat2['MWh/m2'] = df_concat2['kW/m2'] / 1000
+df_concat2['MWh/m2'] = df_concat2['kWh/m2'] / 1000
 # df_concat2
 
 
