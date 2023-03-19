@@ -110,18 +110,18 @@ st.markdown('06_ 온실가스 배출량 산정 (개전전-개선후) ')
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-   st.header("국토안전관리원")
+   st.markdown("국토안전관리원")
    st.image("image/국토안전관리원.png")
 
 with col2:
-   st.header("동아대학교")
+   st.markdown("동아대학교")
    st.image("image/동아대학교.jpg")
 
 with col3:
-   st.header("서울대학교")
+   st.markdown("서울대학교")
    st.image("image/서울대학교.jpeg")
 
 with col4:
-   st.header("(주)이에이엔테크놀로지")
+   st.markdown("(주)이에이엔테크놀로지")
    st.image("image/ean.png")
 
