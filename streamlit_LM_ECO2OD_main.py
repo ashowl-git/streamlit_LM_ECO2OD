@@ -129,7 +129,7 @@ st.caption('----------------------------------------', unsafe_allow_html=False)
 tab1, tab2, tab3 = st.tabs(["동아대학교", "서울대학교", "(주)이에이엔테크놀로지"])
 
 with tab1:
-   st.header("동아대학교")
+   st.text("동아대학교")
    st.image("image/동아대학교.jpg", width=200)
 
 with tab2:
