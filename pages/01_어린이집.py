@@ -519,10 +519,10 @@ df_concat2.loc[cond3&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_DHW_LNG_
 df_concat2.loc[cond3&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_DHW_LPG_ratio  * tCO2eq_LPG_co
 df_concat2.loc[cond3&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_DHW_LOil_ratio * tCO2eq_LOil_co
 
-df_concat2.loc[cond3_1&cond4,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_cooling_elec_ratio * tCO2eq_elec_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_cooling_LNG_ratio * tCO2eq_LNG_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_cooling_LPG_ratio  * tCO2eq_LPG_co
-df_concat2.loc[cond3_1&cond4,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_cooling_LOil_ratio * tCO2eq_LOil_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_Elec/m2'] = df_concat2['MW/m2'] * alt_cooling_elec_ratio * tCO2eq_elec_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LPG/m2'] = df_concat2['MW/m2'] * alt_cooling_LNG_ratio * tCO2eq_LNG_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LNG/m2'] = df_concat2['MW/m2'] * alt_cooling_LPG_ratio  * tCO2eq_LPG_co
+df_concat2.loc[cond3_1&cond5,'tCO2eq_LOil/m2'] = df_concat2['MW/m2'] * alt_cooling_LOil_ratio * tCO2eq_LOil_co
 
 
 # 전기사용하는 냉방 조명 환기 index는 그대로 전기
