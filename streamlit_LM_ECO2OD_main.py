@@ -82,7 +82,7 @@ hide_menu_style = """
         footer:after {content:'Copyright 2023. (주)이에이엔테크놀로지. All rights reserved.';
         display:block;
         opsition:relatiive;
-        color:orange; #tomato
+        color:orange; #tomato 
         padding:5px;
         top:100px;}
 
