@@ -239,6 +239,8 @@ r2 = r2_score(y_test, y_preds)
 
 # st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
 
+lr.intercept_
+np.round(lr.coef_, 1)
 
 print('절편값:',lr.intercept_)
 print('회귀계수값:',np.round(lr.coef_, 1))
