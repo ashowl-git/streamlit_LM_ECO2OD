@@ -203,9 +203,6 @@ lr2 = LinearRegression()
 lr.fit(X_train, y_train)
 lr2.fit(X_train2, y_train2)
 
-#임시로 계수보기
-lr
-lr2
 
 # 테스트 세트로 예측해보고 예측결과를 평가하기
 y_preds = lr.predict(X_test)
@@ -243,8 +240,8 @@ r2 = r2_score(y_test, y_preds)
 # st.metric(label='mean_absolute_percentage_error', value = np.round(mape, 3))
 
 
-# print('절편값:',lr.intercept_)
-# print('회귀계수값:',np.round(lr.coef_, 1))
+print('절편값:',lr.intercept_)
+print('회귀계수값:',np.round(lr.coef_, 1))
 
 
 # 회귀계수를 테이블로 만들어 보기 1 전치하여 세로로 보기 (ipynb 확인용)
