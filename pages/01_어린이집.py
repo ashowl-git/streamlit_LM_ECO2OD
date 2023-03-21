@@ -569,7 +569,12 @@ st.metric(label="온실가스 감축 원단위_($tCO_2eq/m^2$)",
           value = np.round(tCO2eq_reduce, 4),  
           delta_color="inverse")
 
-
+# 인풋값들을 표데이터로
+df2_input_re = df2_input.columns=lm_features
+df_input_all = pd.concat([df_input, df2_input], axis=0)
+df_input_all['Alt'] = ['Base','Alt']
+df_input_all = df_input_all.set_index(df_input_all['Alt'])
+st.dataframe(df_input_all.T)
 
 
 # # 사용처별 온실가스 절감량 확인해보기 (굳이 필요한가?)
