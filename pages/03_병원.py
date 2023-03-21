@@ -588,7 +588,7 @@ df_input_all = pd.concat([df_input, df2_input], axis=0)
 df_input_all['Alt'] = ['Base','Alt']
 df_input_all = df_input_all.set_index(df_input_all['Alt'])
 df_input_all_T = df_input_all.T
-df_input_all_T
+st.dataframe(df_input_all_T)
 
 
 
