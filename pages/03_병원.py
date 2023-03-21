@@ -581,6 +581,8 @@ st.metric(label="온실가스 감축 원단위_($tCO_2eq/m^2$)",
           delta_color="inverse")
 
 
+df_tCO2eq.T.reset_index()
+
 
 # 인풋값들을 표데이터로
 df2_input_re = df2_input.columns=lm_features
