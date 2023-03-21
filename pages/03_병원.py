@@ -593,6 +593,8 @@ df_input_all_T = df_input_all_T.astype('int')
 df_input_all_T['변화율'] =(1-(df_input_all_T['Alt']/df_input_all_T['Base']))
 
 
+df_input_all_T
+
 
 
 # # 사용처별 온실가스 절감량 확인해보기 (굳이 필요한가?)
