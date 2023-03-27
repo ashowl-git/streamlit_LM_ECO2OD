@@ -504,7 +504,7 @@ cond3_1 = df_concat2['index'] == '냉방'
 cond4 = df_concat2['Alt'] == 'BASE'
 cond5 = df_concat2['Alt'] == 'Alt_1'
 
-# BASE 난방 급탕 냉방 열원의 연료종류 비율 조정
+# BASE 난방 급탕 냉방 열원의 연료종류 비율 조정 (_인)
 df_concat2.loc[cond2&cond4,'tCO2eq_Elec/m2'] = df_concat2['MWh/m2'] * base_heat_elec_ratio * tCO2eq_elec_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LPG/m2'] = df_concat2['MWh/m2'] * base_heat_LNG_ratio * tCO2eq_LNG_co
 df_concat2.loc[cond2&cond4,'tCO2eq_LNG/m2'] = df_concat2['MWh/m2'] * base_heat_LPG_ratio  * tCO2eq_LPG_co
